@@ -20,7 +20,6 @@ const SearchExercises = ({setExercise,setBodyPart,bodyPart}) => {
   const handleClick=async()=>{
     if(search){
       const exerciseData=await fetchData('https://exercisedb.p.rapidapi.com/exercises',exerciseOptions);
-      console.log(exerciseData);
 
       const SearchedData=exerciseData.filter((exercise)=>exercise.name.toLowerCase().includes(search) || exercise.target.toLowerCase().includes(search) || exercise.bodyPart.toLowerCase().includes(search) || exercise.equipment.toLowerCase().includes(search));
       setSearch('')
@@ -29,7 +28,7 @@ const SearchExercises = ({setExercise,setBodyPart,bodyPart}) => {
   }
 
   return (
-    <Stack alignItems='center' p='10vh' mt='5vh' justifyContent='center'>
+    <Stack alignItems='center' p='5vh' mt='5vh' justifyContent='center'>
       <Typography fontWeight='700' fontSize={{lg:'3rem',sm:'2em',xs:'1em'}} mt='5vh' textAlign='center'>
         Awesome Exercise you <br/> should know
       </Typography>
@@ -39,7 +38,7 @@ const SearchExercises = ({setExercise,setBodyPart,bodyPart}) => {
             Search
           </Button>
       </Box>
-      <Box sx={{position:'relative',padding:'5vh',width:'100vw'}}>
+      <Box sx={{position:'relative',padding:'3vh',width:'100vw'}}>
         <HorizontalScroll data={bodyparts} bodyPart={bodyPart} setBodyPart={setBodyPart}/>
       </Box>
     </Stack>
