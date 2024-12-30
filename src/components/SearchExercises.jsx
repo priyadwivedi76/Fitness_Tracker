@@ -19,11 +19,16 @@ const SearchExercises = ({setExercise,setBodyPart,bodyPart}) => {
 
   const handleClick=async()=>{
     if(search){
-      const exerciseData=await fetchData('https://exercisedb.p.rapidapi.com/exercises',exerciseOptions);
+      const exercises=await fetchData('https://exercisedb.p.rapidapi.com/exercises',exerciseOptions);
 
-      const SearchedData=exerciseData.filter((exercise)=>exercise.name.toLowerCase().includes(search) || exercise.target.toLowerCase().includes(search) || exercise.bodyPart.toLowerCase().includes(search) || exercise.equipment.toLowerCase().includes(search));
+      const searchedExercises = exercises.filter(
+        (item) => item.name.toLowerCase().includes(search)
+               || item.target.toLowerCase().includes(search)
+               || item.equipment.toLowerCase().includes(search)
+               || item.bodyPart.toLowerCase().includes(search),
+      );
+      window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
       setSearch('')
-      setExercise(SearchedData);
     }
   }
 
@@ -33,7 +38,7 @@ const SearchExercises = ({setExercise,setBodyPart,bodyPart}) => {
         Awesome Exercise you <br/> should know
       </Typography>
       <Box position='relative' mb='5vh' mt='1vh'>
-        <TextField height='5vh' value={search} onChange={(e)=>setSearch(e.target.value.toLowerCase())} placeholder='Search Exercises' type='text' sx={{input:{fontWeight:'600',borderRadius:'2vh',border:'none'},width:{lg:'75vw',xs:'60vw'}}} backgroundcolor='#fff' borderradius=''/>
+        <TextField height='5vh' value={search} onChange={(e)=>setSearch(e.target.value.toLowerCase())} placeholder='Search Exercises' type='text' sx={{input:{fontWeight:'600',borderRadius:'2vh',border:'none'},width:{lg:'75vw',xs:'60vw'}}} backgroundcolor='#fff'/>
           <Button onClick={handleClick} className='search-btn' sx={{bgcolor:'#ff2625' ,color:'white',textTransform:'none',width:{lg:'10vw',xs:'6vw'},height:'8vh',fontSize:{lg:'1.5em',xs:'1em'}, position:'absolute',right:'0'}}>
             Search
           </Button>
